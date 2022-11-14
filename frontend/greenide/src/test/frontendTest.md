@@ -1,0 +1,10 @@
+1. Open the procet folder => Both configiguration files should be created, if config files are incorrect they will be overwritten
+2. Open Java Class with no settigns => no marking of hotspots and greenspots, hover shows runtime and energy
+3. If config file is opened and wrong input is made => config file is overwritten with the old config files
+4. If settings window is open, settings are made and confirmed with button => settings are saved in the config file
+5. If hotspots window is open, runtime or energy is selected and the number of displayed spots => hotspots and greenspots are loaded 
+6. Click on loaded hotspots/greenspots in the hotspots window => jump into the Java class
+7. If different settings are set => Java class show colored greenspots and hotspots in the scrollbar and in the text
+8. If different settigns are set and hovered over greenspot/hotspot => display runtime and energy for default config, custom config and difference  of both 
+9. Change project => config files are read or created. Test 1 to 8 should work here accordingly 
+10. Change to wrong project => Error message is displayed 

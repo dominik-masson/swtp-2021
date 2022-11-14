@@ -1,0 +1,52 @@
+stages:
+  - build 
+  - test
+  - deploy
+
+cache:
+  paths:
+    - .m2/repository/
+    - target/
+    - frontend/greenide/node_modules/
+
+test_frontend:
+  stage: test
+  image: node:12-slim
+  variables:
+    DISPLAY: ':99.0'
+  script:
+    - cd frontend/greenide
+    - apt-get update
+    - apt-get install -y xvfb libxtst6 libnss3 libgtk-3-0 libxss1 libasound2 libsecret-1-0 git
+    - npm ci
+    - /usr/bin/Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+    - npm run test
+
+test_backend:
+  stage: test
+  image: node:12-slim
+  script:
+    - cd backend/server
+    - apt-get update
+    - npm i
+    - npm run test
+
+package_extension:
+  stage: build
+  image: node:latest
+  script:
+    - cd frontend/greenide
+    - npm install
+    - npm run package
+  artifacts:
+    paths:
+      - frontend/greenide/greenide.vsix
+
+deploy:
+  stage: deploy
+  image: ruby:latest
+  before_script:
+    - gem install dpl 
+    - cd backend/server
+  script: dpl --provider=heroku --app=server-backend-swtp-13 --api-key=$HEROKU_API_TOKEN --skip_cleanup
+  

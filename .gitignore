@@ -1,0 +1,9 @@
+frontend/greenide/out
+frontend/greenide/dist
+frontend/greenide/node_modules
+frontend/greenide/.vscode-test/
+frontend/greenide/*.vsix
+frontend/greenide/greenide.config
+backend/node-test/node-node_modules
+backend/server/node_modules
+backend/server/coverage
